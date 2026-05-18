@@ -2,4 +2,6 @@ pub mod max;
 pub mod min;
 pub mod negative;
 pub mod positive;
-pub mod range;
+
+pub use max::MaxValidator;
+pub use min::MinValidator;

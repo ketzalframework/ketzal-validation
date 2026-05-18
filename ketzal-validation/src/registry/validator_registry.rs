@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use crate::traits::validator::Validator;
+use crate::traits::Validator;
 
 pub struct ValidatorRegistry {
     validators: HashMap<String, Box<dyn Validator>>,
