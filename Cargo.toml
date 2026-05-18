@@ -1,0 +1,17 @@
+[workspace]
+members = []
+
+resolver = "2"
+
+[workspace.package]
+edition = "2024"
+license-file = "LICENSE"
+readme = "README.md"
+
+authors = ["Hector3269 <danielramirezr27@gmail.com>"]
+
+homepage = "https://github.com/ketzalframework/ketzal-validation.git"
+repository = "https://github.com/ketzalframework/ketzal-validation.git"
+
+
+description = "Declarative models and validation for the Ketzal framework"
