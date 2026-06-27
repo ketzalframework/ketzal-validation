@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::sync::OnceLock;
 
 use crate::traits::Validator;
 
@@ -23,5 +24,20 @@ impl ValidatorRegistry {
 
     pub fn get(&self, name: &str) -> Option<&Box<dyn Validator>> {
         self.validators.get(name)
+    }
+
+    pub fn global() -> &'static Self {
+        static GLOBAL: OnceLock<ValidatorRegistry> = OnceLock::new();
+        GLOBAL.get_or_init(|| {
+            let mut registry = ValidatorRegistry::new();
+            super::builtins::register_builtins(&mut registry);
+            registry
+        })
+    }
+}
+
+impl Default for ValidatorRegistry {
+    fn default() -> Self {
+        Self::new()
     }
 }

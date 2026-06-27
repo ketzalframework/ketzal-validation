@@ -1,0 +1,10 @@
+{
+  "max.arg_required": "The max argument is required",
+  "max.arg_not_number": "The max argument must be a number",
+  "max.exceeded": "The field {field} must not exceed {max}",
+  "max.unsupported_type": "Unsupported value type",
+  "min.arg_required": "The min argument is required",
+  "min.arg_not_number": "The min argument must be a number",
+  "min.below": "The field {field} must be at least {min}",
+  "min.unsupported_type": "Unsupported value type"
+}
