@@ -3,7 +3,11 @@
 version = 4
 
 [[package]]
-name = "ketzal-validation"
+name = "ketzal-validation_macro"
+version = "0.1.0"
+
+[[package]]
+name = "ketzal_validation"
 version = "0.1.0"
 dependencies = [
  "serde",

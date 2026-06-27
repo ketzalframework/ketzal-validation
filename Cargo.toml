@@ -1,5 +1,5 @@
 [workspace]
-members = ["ketzal-validation"]
+members = ["ketzal_validation", "ketzal-validation_macro"]
 
 resolver = "2"
 
