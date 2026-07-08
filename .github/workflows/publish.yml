@@ -30,11 +30,9 @@ jobs:
         run: |
           VERSION="${{ steps.tag.outputs.version }}"
 
-          sed -i "s/^version = .*/version = \"$VERSION\"/" ketzal-validation_macro/Cargo.toml
-          sed -i "s/^version = .*/version = \"$VERSION\"/" ketzal_validation/Cargo.toml
-
-          sed -i "s/version = \".*\"/version = \"$VERSION\"/" \
-            ketzal_validation/Cargo.toml
+          # Update only the [package] version field (line starting with "version = ")
+          sed -i "s/^version = \".*\"/version = \"$VERSION\"/" ketzal-validation_macro/Cargo.toml
+          sed -i "s/^version = \".*\"/version = \"$VERSION\"/" ketzal_validation/Cargo.toml
 
       - name: Check formatting
         run: cargo fmt --all --check
