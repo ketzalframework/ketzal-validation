@@ -1,6 +1,6 @@
 use crate::errors::ValidationErrors;
-use crate::utils::helpers;
 use crate::traits::Validator;
+use crate::utils::helpers;
 
 pub struct Max;
 
@@ -16,6 +16,13 @@ impl Validator for Max {
         args: &[String],
     ) -> Result<(), ValidationErrors> {
         let max = helpers::parse_arg_f64(field, "max", args)?;
-        helpers::validate_threshold(field, value, "max", max, |a, b| a > b, "validator.max.exceeded")
+        helpers::validate_threshold(
+            field,
+            value,
+            "max",
+            max,
+            |a, b| a > b,
+            "validator.max.exceeded",
+        )
     }
 }

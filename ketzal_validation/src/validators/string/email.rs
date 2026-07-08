@@ -55,11 +55,7 @@ impl Validator for Email {
         let Some(email) = value.downcast_ref::<String>() else {
             let mut errors = ValidationErrors::new();
 
-            errors.push(
-                field,
-                self.name(),
-                i18n::t("unsupported_type", &[]),
-            );
+            errors.push(field, self.name(), i18n::t("unsupported_type", &[]));
 
             return Err(errors);
         };

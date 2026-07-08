@@ -20,7 +20,12 @@ fn test_min_name_insufficient() {
     let result = user.validate();
     assert!(result.is_err());
     let errors = result.unwrap_err();
-    assert!(errors.errors.iter().any(|e| e.field == "name" && e.rule == "min"));
+    assert!(
+        errors
+            .errors
+            .iter()
+            .any(|e| e.field == "name" && e.rule == "min")
+    );
 }
 
 #[test]
@@ -33,7 +38,12 @@ fn test_min_email_insufficient() {
     let result = user.validate();
     assert!(result.is_err());
     let errors = result.unwrap_err();
-    assert!(errors.errors.iter().any(|e| e.field == "email" && e.rule == "min"));
+    assert!(
+        errors
+            .errors
+            .iter()
+            .any(|e| e.field == "email" && e.rule == "min")
+    );
 }
 
 #[test]
@@ -46,5 +56,10 @@ fn test_min_optional_some_insufficient() {
     let result = user.validate();
     assert!(result.is_err());
     let errors = result.unwrap_err();
-    assert!(errors.errors.iter().any(|e| e.field == "midelnames" && e.rule == "min"));
+    assert!(
+        errors
+            .errors
+            .iter()
+            .any(|e| e.field == "midelnames" && e.rule == "min")
+    );
 }

@@ -1,7 +1,7 @@
-use regex::Regex;
 use crate::errors::ValidationErrors;
 use crate::i18n;
 use crate::traits::Validator;
+use regex::Regex;
 
 pub struct RegexValidator;
 
@@ -30,13 +30,21 @@ impl Validator for RegexValidator {
 
         let re = Regex::new(pattern).map_err(|_| {
             let mut errors = ValidationErrors::new();
-            errors.push(field, "regex", i18n::t("validator.regex.invalid_pattern", &[("field", field)]));
+            errors.push(
+                field,
+                "regex",
+                i18n::t("validator.regex.invalid_pattern", &[("field", field)]),
+            );
             errors
         })?;
 
         if !re.is_match(s) {
             let mut errors = ValidationErrors::new();
-            errors.push(field, "regex", i18n::t("validator.regex.no_match", &[("field", field)]));
+            errors.push(
+                field,
+                "regex",
+                i18n::t("validator.regex.no_match", &[("field", field)]),
+            );
             return Err(errors);
         }
 

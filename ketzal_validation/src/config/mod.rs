@@ -10,8 +10,7 @@ struct AppConfig {
 static CONFIG: RwLock<Option<AppConfig>> = RwLock::new(None);
 
 fn load_default() -> AppConfig {
-    serde_yaml::from_str(include_str!("../../ketzal.yml"))
-        .expect("Failed to parse ketzal.yml")
+    serde_yaml::from_str(include_str!("../../ketzal.yml")).expect("Failed to parse ketzal.yml")
 }
 
 pub fn locale() -> String {

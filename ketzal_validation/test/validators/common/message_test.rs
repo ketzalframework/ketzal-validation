@@ -22,7 +22,11 @@ fn test_custom_message_min_with_email() {
     let result = model.validate();
     assert!(result.is_err());
     let errors = result.unwrap_err();
-    let err = errors.errors.iter().find(|e| e.field == "email" && e.rule == "min").unwrap();
+    let err = errors
+        .errors
+        .iter()
+        .find(|e| e.field == "email" && e.rule == "min")
+        .unwrap();
     assert_eq!(err.message, "The email needs at least 5 chars");
 }
 
@@ -48,5 +52,10 @@ fn test_default_message_when_no_custom() {
     let result = model.validate();
     assert!(result.is_err());
     let errors = result.unwrap_err();
-    assert!(errors.errors.iter().any(|e| e.field == "name" && e.rule == "min"));
+    assert!(
+        errors
+            .errors
+            .iter()
+            .any(|e| e.field == "name" && e.rule == "min")
+    );
 }

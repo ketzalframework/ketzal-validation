@@ -18,7 +18,12 @@ fn test_confirmed_mismatch() {
     let result = req.validate();
     assert!(result.is_err());
     let errors = result.unwrap_err();
-    assert!(errors.errors.iter().any(|e| e.field == "password" && e.rule == "confirmed"));
+    assert!(
+        errors
+            .errors
+            .iter()
+            .any(|e| e.field == "password" && e.rule == "confirmed")
+    );
 }
 
 #[test]
@@ -30,6 +35,11 @@ fn test_confirmed_min_error() {
     let result = req.validate();
     assert!(result.is_err());
     let errors = result.unwrap_err();
-    assert!(errors.errors.iter().any(|e| e.field == "password" && e.rule == "min"));
+    assert!(
+        errors
+            .errors
+            .iter()
+            .any(|e| e.field == "password" && e.rule == "min")
+    );
     assert!(!errors.errors.iter().any(|e| e.rule == "confirmed"));
 }

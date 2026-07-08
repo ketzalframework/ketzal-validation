@@ -1,6 +1,6 @@
 use crate::errors::ValidationErrors;
-use crate::utils::helpers;
 use crate::traits::Validator;
+use crate::utils::helpers;
 
 pub struct Positive;
 
@@ -15,6 +15,12 @@ impl Validator for Positive {
         value: &dyn std::any::Any,
         _args: &[String],
     ) -> Result<(), ValidationErrors> {
-        helpers::validate_numeric(field, value, "positive", |v| v <= 0.0, "validator.positive.not_positive")
+        helpers::validate_numeric(
+            field,
+            value,
+            "positive",
+            |v| v <= 0.0,
+            "validator.positive.not_positive",
+        )
     }
 }

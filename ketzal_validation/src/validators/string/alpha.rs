@@ -23,7 +23,11 @@ impl Validator for Alpha {
 
         if !s.chars().all(|c| c.is_alphabetic()) {
             let mut errors = ValidationErrors::new();
-            errors.push(field, "alpha", i18n::t("validator.alpha.not_alpha", &[("field", field)]));
+            errors.push(
+                field,
+                "alpha",
+                i18n::t("validator.alpha.not_alpha", &[("field", field)]),
+            );
             return Err(errors);
         }
 

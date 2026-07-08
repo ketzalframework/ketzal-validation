@@ -23,20 +23,30 @@ impl Validator for Integer {
             return Ok(());
         }
 
-        if let Some(v) = value.downcast_ref::<f32>() && v.fract() == 0.0 {
+        if let Some(v) = value.downcast_ref::<f32>()
+            && v.fract() == 0.0
+        {
             return Ok(());
         }
 
-        if let Some(v) = value.downcast_ref::<f64>() && v.fract() == 0.0 {
+        if let Some(v) = value.downcast_ref::<f64>()
+            && v.fract() == 0.0
+        {
             return Ok(());
         }
 
-        if let Some(s) = value.downcast_ref::<String>() && s.parse::<i64>().is_ok() {
+        if let Some(s) = value.downcast_ref::<String>()
+            && s.parse::<i64>().is_ok()
+        {
             return Ok(());
         }
 
         let mut errors = ValidationErrors::new();
-        errors.push(field, "integer", i18n::t("validator.integer.not_integer", &[("field", field)]));
+        errors.push(
+            field,
+            "integer",
+            i18n::t("validator.integer.not_integer", &[("field", field)]),
+        );
         Err(errors)
     }
 }

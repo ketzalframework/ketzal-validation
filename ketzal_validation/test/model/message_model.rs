@@ -6,6 +6,9 @@ pub struct MessageModel {
     #[message(min = "Custom :attribute min message")]
     pub name: String,
     #[rule("min:5|max:20")]
-    #[message(min = "The :attribute needs at least :min chars", max = "The :attribute must not exceed :max chars")]
+    #[message(
+        min = "The :attribute needs at least :min chars",
+        max = "The :attribute must not exceed :max chars"
+    )]
     pub email: Option<String>,
 }
