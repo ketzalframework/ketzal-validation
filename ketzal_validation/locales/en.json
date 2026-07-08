@@ -1,10 +1,11 @@
 {
-  "max.arg_required": "The max argument is required",
   "max.arg_not_number": "The max argument must be a number",
+  "max.arg_required": "The max argument is required",
   "max.exceeded": "The field {field} must not exceed {max}",
-  "max.unsupported_type": "Unsupported value type",
-  "min.arg_required": "The min argument is required",
   "min.arg_not_number": "The min argument must be a number",
+  "min.arg_required": "The min argument is required",
   "min.below": "The field {field} must be at least {min}",
-  "min.unsupported_type": "Unsupported value type"
+  "positive.not_positive": "The field {field} must be positive",
+  "negative.not_negative": "The field {field} must be negative",
+  "validator.unsupported_type": "Unsupported value type"
 }
