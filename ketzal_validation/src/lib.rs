@@ -7,4 +7,4 @@ pub mod traits;
 pub(crate) mod utils;
 pub mod validators;
 
-pub use ketzal_validation_macro::{KetzalBasicM, KetzalSchema};
+pub use ketzal_validations_macro::{KetzalBasicM, KetzalSchema};
