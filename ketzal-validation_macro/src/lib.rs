@@ -4,7 +4,7 @@ mod utils;
 
 use proc_macro::TokenStream;
 
-#[proc_macro_derive(KetzalBasicM, attributes(rule))]
+#[proc_macro_derive(KetzalBasicM, attributes(rule, message))]
 pub fn derive_validate(input: TokenStream) -> TokenStream {
     basic::derive_validate(input)
 }

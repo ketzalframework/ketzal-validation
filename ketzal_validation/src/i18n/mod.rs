@@ -33,8 +33,8 @@ fn load() -> &'static (FlatMap, FlatMap) {
         let en: serde_json::Value =
             serde_json::from_str(include_str!("../../locales/en.json")).unwrap();
 
-        let mut es_map = FlatMap::new();
-        let mut en_map = FlatMap::new();
+        let mut es_map = FlatMap::with_capacity(20);
+        let mut en_map = FlatMap::with_capacity(20);
         flatten(&es, "", &mut es_map);
         flatten(&en, "", &mut en_map);
 

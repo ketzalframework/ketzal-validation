@@ -22,8 +22,8 @@ impl ValidatorRegistry {
             .insert(validator.name().to_string(), Box::new(validator));
     }
 
-    pub fn get(&self, name: &str) -> Option<&Box<dyn Validator>> {
-        self.validators.get(name)
+    pub fn get(&self, name: &str) -> Option<&dyn Validator> {
+        self.validators.get(name).map(|b| b.as_ref())
     }
 
     pub fn global() -> &'static Self {

@@ -23,22 +23,16 @@ impl Validator for Integer {
             return Ok(());
         }
 
-        if let Some(v) = value.downcast_ref::<f32>() {
-            if v.fract() == 0.0 {
-                return Ok(());
-            }
+        if let Some(v) = value.downcast_ref::<f32>() && v.fract() == 0.0 {
+            return Ok(());
         }
 
-        if let Some(v) = value.downcast_ref::<f64>() {
-            if v.fract() == 0.0 {
-                return Ok(());
-            }
+        if let Some(v) = value.downcast_ref::<f64>() && v.fract() == 0.0 {
+            return Ok(());
         }
 
-        if let Some(s) = value.downcast_ref::<String>() {
-            if s.parse::<i64>().is_ok() {
-                return Ok(());
-            }
+        if let Some(s) = value.downcast_ref::<String>() && s.parse::<i64>().is_ok() {
+            return Ok(());
         }
 
         let mut errors = ValidationErrors::new();
