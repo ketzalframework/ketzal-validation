@@ -7,5 +7,9 @@
   "min.below": "El campo {field} debe tener al menos {min}",
   "positive.not_positive": "El campo {field} debe ser positivo",
   "negative.not_negative": "El campo {field} debe ser negativo",
+  "email.invalid": "El campo {field} debe ser un correo electrónico válido",
+  "regex.arg_required": "El argumento regex es requerido",
+  "regex.invalid_pattern": "El patrón regex no es válido",
+  "regex.no_match": "El campo {field} no coincide con el patrón requerido",
   "validator.unsupported_type": "Tipo de valor no soportado"
 }
