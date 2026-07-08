@@ -1,0 +1,65 @@
+name: Publish to crates.io
+
+on:
+  push:
+    tags:
+      - "v*"
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Extract version from tag
+        id: tag
+        run: |
+          echo "version=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
+
+      - name: Update Cargo.toml versions
+        run: |
+          VERSION="${{ steps.tag.outputs.version }}"
+
+          sed -i "s/^version = .*/version = \"$VERSION\"/" ketzal-validation_macro/Cargo.toml
+          sed -i "s/^version = .*/version = \"$VERSION\"/" ketzal_validation/Cargo.toml
+
+          sed -i "s/version = \".*\"/version = \"$VERSION\"/" \
+            ketzal_validation/Cargo.toml
+
+      - name: Check formatting
+        run: cargo fmt --all --check
+
+      - name: Run Clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
+
+      - name: Run tests
+        run: cargo test --all
+
+      - name: Package macro crate
+        working-directory: ketzal-validation_macro
+        run: cargo package
+
+      - name: Publish macro crate
+        working-directory: ketzal-validation_macro
+        run: cargo publish --token ${{ secrets.CARGO_TOKEN }}
+
+      - name: Wait for crates.io index
+        run: sleep 60
+
+      - name: Package validation crate
+        working-directory: ketzal_validation
+        run: cargo package
+
+      - name: Publish validation crate
+        working-directory: ketzal_validation
+        run: cargo publish --token ${{ secrets.CARGO_TOKEN }}
