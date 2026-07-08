@@ -3,22 +3,42 @@ use std::sync::OnceLock;
 
 use crate::config;
 
-type LangMap = HashMap<String, String>;
+type FlatMap = HashMap<String, String>;
 
-static CACHE: OnceLock<HashMap<&'static str, LangMap>> = OnceLock::new();
+static CACHE: OnceLock<(FlatMap, FlatMap)> = OnceLock::new();
 
-fn load() -> &'static HashMap<&'static str, LangMap> {
+fn flatten(value: &serde_json::Value, prefix: &str, map: &mut FlatMap) {
+    match value {
+        serde_json::Value::Object(obj) => {
+            for (k, v) in obj {
+                let key = if prefix.is_empty() {
+                    k.clone()
+                } else {
+                    format!("{prefix}.{k}")
+                };
+                flatten(v, &key, map);
+            }
+        }
+        serde_json::Value::String(s) => {
+            map.insert(prefix.to_string(), s.clone());
+        }
+        _ => {}
+    }
+}
+
+fn load() -> &'static (FlatMap, FlatMap) {
     CACHE.get_or_init(|| {
-        let mut map: HashMap<&str, LangMap> = HashMap::new();
-        map.insert(
-            "es",
-            serde_json::from_str(include_str!("../../locales/es.json")).unwrap(),
-        );
-        map.insert(
-            "en",
-            serde_json::from_str(include_str!("../../locales/en.json")).unwrap(),
-        );
-        map
+        let es: serde_json::Value =
+            serde_json::from_str(include_str!("../../locales/es.json")).unwrap();
+        let en: serde_json::Value =
+            serde_json::from_str(include_str!("../../locales/en.json")).unwrap();
+
+        let mut es_map = FlatMap::new();
+        let mut en_map = FlatMap::new();
+        flatten(&es, "", &mut es_map);
+        flatten(&en, "", &mut en_map);
+
+        (es_map, en_map)
     })
 }
 
@@ -27,14 +47,13 @@ pub fn t(key: &str, params: &[(&str, &str)]) -> String {
 }
 
 pub fn t_with(lang: &str, key: &str, params: &[(&str, &str)]) -> String {
-    let all = load();
+    let (es, en) = load();
 
-    let lang_map = all
-        .get(lang)
-        .or_else(|| all.get("es"))
-        .expect("Default language 'es' not found");
-
-    let template = lang_map.get(key).map(String::as_str).unwrap_or(key);
+    let template = match lang {
+        "en" => en.get(key).or_else(|| es.get(key)).map(String::as_str),
+        _ => es.get(key).map(String::as_str),
+    }
+    .unwrap_or(key);
 
     let mut msg = template.to_string();
     for (k, v) in params {

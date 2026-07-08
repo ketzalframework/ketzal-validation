@@ -1,6 +1,6 @@
 use proc_macro::TokenStream;
 use quote::quote;
-use syn::{Data, DeriveInput, Fields, LitStr, parse_macro_input};
+use syn::{Data, DeriveInput, Fields, Ident, LitStr, parse_macro_input};
 
 use crate::utils::is_option_type;
 
@@ -40,10 +40,30 @@ pub fn derive_validate(input: TokenStream) -> TokenStream {
             for part in rule.split('|') {
                 let mut pieces = part.split(':');
                 let rule_name = pieces.next().unwrap();
-                let args: Vec<String> = pieces.map(|v| v.to_string()).collect();
+                let args: Vec<String> = pieces
+                    .next()
+                    .map(|rest| rest.split(',').map(|v| v.to_string()).collect())
+                    .unwrap_or_default();
                 let args_tokens = args.iter().map(|v| quote! { #v.to_string() });
 
-                if is_option {
+                if rule_name == "confirmed" {
+                    let confirmation_name = Ident::new(
+                        &format!("{}_confirmation", field_name_str),
+                        field_name.span(),
+                    );
+                    validators.push(quote! {
+                        if self.#field_name != self.#confirmation_name {
+                            errors.push(
+                                #field_name_str,
+                                "confirmed",
+                                ketzal_validation::i18n::t(
+                                    "validator.confirmed.mismatch",
+                                    &[("field", #field_name_str)],
+                                ),
+                            );
+                        }
+                    });
+                } else if is_option {
                     validators.push(quote! {
                         if let Some(ref val) = self.#field_name {
                             if let Some(validator) = registry.get(#rule_name) {

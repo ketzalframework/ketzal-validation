@@ -17,13 +17,13 @@ impl Validator for Alpha {
     ) -> Result<(), ValidationErrors> {
         let Some(s) = value.downcast_ref::<String>() else {
             let mut errors = ValidationErrors::new();
-            errors.push(field, "alpha", i18n::t("validator.unsupported_type", &[]));
+            errors.push(field, "alpha", i18n::t("unsupported_type", &[]));
             return Err(errors);
         };
 
         if !s.chars().all(|c| c.is_alphabetic()) {
             let mut errors = ValidationErrors::new();
-            errors.push(field, "alpha", i18n::t("alpha.not_alpha", &[("field", field)]));
+            errors.push(field, "alpha", i18n::t("validator.alpha.not_alpha", &[("field", field)]));
             return Err(errors);
         }
 

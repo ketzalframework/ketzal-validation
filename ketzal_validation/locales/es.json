@@ -1,16 +1,44 @@
 {
-  "max.arg_not_number": "El argumento max debe ser un número",
-  "max.arg_required": "El argumento max es requerido",
-  "max.exceeded": "El campo {field} no debe exceder {max}",
-  "min.arg_not_number": "El argumento min debe ser un número",
-  "min.arg_required": "El argumento min es requerido",
-  "min.below": "El campo {field} debe tener al menos {min}",
-  "positive.not_positive": "El campo {field} debe ser positivo",
-  "negative.not_negative": "El campo {field} debe ser negativo",
-  "alpha.not_alpha": "El campo {field} solo debe contener letras",
-  "email.invalid": "El campo {field} debe ser un correo electrónico válido",
-  "regex.arg_required": "El argumento regex es requerido",
-  "regex.invalid_pattern": "El patrón regex no es válido",
-  "regex.no_match": "El campo {field} no coincide con el patrón requerido",
-  "validator.unsupported_type": "Tipo de valor no soportado"
+  "unsupported_type": "Tipo de valor no soportado",
+  "validator": {
+    "min": {
+      "below": "El campo {field} debe tener al menos {min}",
+      "arg_required": "El argumento min es requerido",
+      "arg_not_number": "El argumento min debe ser un número"
+    },
+    "max": {
+      "exceeded": "El campo {field} no debe exceder {max}",
+      "arg_required": "El argumento max es requerido",
+      "arg_not_number": "El argumento max debe ser un número"
+    },
+    "positive": {
+      "not_positive": "El campo {field} debe ser positivo"
+    },
+    "negative": {
+      "not_negative": "El campo {field} debe ser negativo"
+    },
+    "email": {
+      "invalid": "El campo {field} debe ser un correo electrónico válido"
+    },
+    "regex": {
+      "arg_required": "El argumento regex es requerido",
+      "invalid_pattern": "El patrón regex no es válido",
+      "no_match": "El campo {field} no coincide con el patrón requerido"
+    },
+    "alpha": {
+      "not_alpha": "El campo {field} solo debe contener letras"
+    },
+    "between": {
+      "arg_required": "Los argumentos min y max son requeridos",
+      "arg_not_number": "Los argumentos deben ser números",
+      "invalid_range": "El mínimo no puede ser mayor que el máximo",
+      "not_between": "El campo {field} debe estar entre {min} y {max}"
+    },
+    "integer": {
+      "not_integer": "El campo {field} debe ser un número entero"
+    },
+    "confirmed": {
+      "mismatch": "La confirmación de {field} no coincide"
+    }
+  }
 }

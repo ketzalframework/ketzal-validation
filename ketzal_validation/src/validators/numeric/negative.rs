@@ -15,6 +15,6 @@ impl Validator for Negative {
         value: &dyn std::any::Any,
         _args: &[String],
     ) -> Result<(), ValidationErrors> {
-        helpers::validate_numeric(field, value, "negative", |v| v >= 0.0, "negative.not_negative")
+        helpers::validate_numeric(field, value, "negative", |v| v >= 0.0, "validator.negative.not_negative")
     }
 }

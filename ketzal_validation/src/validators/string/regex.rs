@@ -18,25 +18,25 @@ impl Validator for RegexValidator {
     ) -> Result<(), ValidationErrors> {
         let Some(s) = value.downcast_ref::<String>() else {
             let mut errors = ValidationErrors::new();
-            errors.push(field, "regex", i18n::t("validator.unsupported_type", &[]));
+            errors.push(field, "regex", i18n::t("unsupported_type", &[]));
             return Err(errors);
         };
 
         let pattern = args.first().ok_or_else(|| {
             let mut errors = ValidationErrors::new();
-            errors.push(field, "regex", i18n::t("regex.arg_required", &[]));
+            errors.push(field, "regex", i18n::t("validator.regex.arg_required", &[]));
             errors
         })?;
 
         let re = Regex::new(pattern).map_err(|_| {
             let mut errors = ValidationErrors::new();
-            errors.push(field, "regex", i18n::t("regex.invalid_pattern", &[("field", field)]));
+            errors.push(field, "regex", i18n::t("validator.regex.invalid_pattern", &[("field", field)]));
             errors
         })?;
 
         if !re.is_match(s) {
             let mut errors = ValidationErrors::new();
-            errors.push(field, "regex", i18n::t("regex.no_match", &[("field", field)]));
+            errors.push(field, "regex", i18n::t("validator.regex.no_match", &[("field", field)]));
             return Err(errors);
         }
 

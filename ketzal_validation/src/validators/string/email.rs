@@ -58,7 +58,7 @@ impl Validator for Email {
             errors.push(
                 field,
                 self.name(),
-                i18n::t("validator.unsupported_type", &[]),
+                i18n::t("unsupported_type", &[]),
             );
 
             return Err(errors);
@@ -70,7 +70,7 @@ impl Validator for Email {
             errors.push(
                 field,
                 self.name(),
-                i18n::t("email.invalid", &[("field", field)]),
+                i18n::t("validator.email.invalid", &[("field", field)]),
             );
 
             return Err(errors);
