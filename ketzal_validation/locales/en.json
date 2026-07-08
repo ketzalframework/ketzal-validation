@@ -7,6 +7,7 @@
   "min.below": "The field {field} must be at least {min}",
   "positive.not_positive": "The field {field} must be positive",
   "negative.not_negative": "The field {field} must be negative",
+  "alpha.not_alpha": "The field {field} must contain only letters",
   "email.invalid": "The field {field} must be a valid email address",
   "regex.arg_required": "The regex argument is required",
   "regex.invalid_pattern": "The regex pattern is invalid",
