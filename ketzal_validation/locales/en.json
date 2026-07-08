@@ -39,6 +39,12 @@
     },
     "confirmed": {
       "mismatch": "The {field} confirmation does not match"
+    },
+    "in": {
+      "not_in_list": "The field {field} must be one of the allowed values"
+    },
+    "not_in": {
+      "in_list": "The field {field} contains a forbidden value"
     }
   }
 }

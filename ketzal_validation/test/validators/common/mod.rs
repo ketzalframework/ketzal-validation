@@ -1,4 +1,5 @@
 pub mod confirmed_test;
+pub mod in_test;
 pub mod max_test;
 pub mod message_test;
 pub mod min_test;
